@@ -10,7 +10,21 @@ include_once("includes/template_head.php")
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-
+                    <?php
+                    if (isset($view)) {
+                        if ($view == "dashboard") {
+                            include("view/dash_view.php");
+                        } elseif ($view == "manage post") {
+                            include("view/manage_post_view.php");
+                        } elseif ($view == "manage category") {
+                            include("view/manage_cat_view.php");
+                        } elseif ($view == "add post") {
+                            include("view/add_post_view.php");
+                        } elseif ($view == "add category") {
+                            include("view/add_cat_view.php");
+                        }
+                    }
+                    ?>
                 </div>
             </main>
             <?php include_once("includes/footer.php") ?>
