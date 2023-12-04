@@ -1,5 +1,17 @@
 <?php
-include_once("includes/template_head.php")
+include_once("includes/template_head.php");
+include('Class/function.php');
+$objAdminLogout = new BlogSiteAdmin();
+session_start();
+$id = $_SESSION['adminID'];
+if (!$id) {
+    header("location:index.php");
+}
+if (isset($_GET['adminlogout'])) {
+    if ($_GET['adminlogout'] == 'logout') {
+        $objAdminLogout->admin_logout();
+    }
+}
 ?>
 
 
