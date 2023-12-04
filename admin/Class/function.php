@@ -66,6 +66,20 @@ class BlogSiteAdmin
     }
 
     // add new category
+    public function display_cat()
+    {
+        // using prepared statements to prevent SQL injection
+        $query = "SELECT * FROM category";
+
+        // method to prepare the statement
+        $allCategories = mysqli_query($this->connection, $query);
+
+        if (isset($allCategories)) {
+            return $allCategories;
+        }
+    }
+
+    // add new category
     public function add_cat($data)
     {
         $cat_name = $data['cat_name'];
@@ -93,9 +107,51 @@ class BlogSiteAdmin
         if (!$result) {
             die("Query failed: " . mysqli_error($this->connection));
         }
-    
+
         // fetch the result as an associative array
         $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
         return $categories;
+    }
+
+    public function update_category($data)
+    {
+        $updated_cat_name = $data['u_cat_name'];
+        $updated_cat_desc = $data['u_cat_desc'];
+        $cat_id = $data['cat_id'];
+        // using prepared statements to prevent SQL injection
+        $query = "UPDATE category SET cat_name=?, cat_desc=? WHERE cat_id=$cat_id";
+
+        // method to prepare the statement
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "ss", $updated_cat_name, $updated_cat_desc);
+
+        if (mysqli_stmt_execute($stmt)) {
+            return "Success";
+        } else {
+            return "Failed";
+        }
+    }
+    public function delete_category($id)
+    {
+        // using prepared statements to prevent SQL injection
+        $query = "DELETE FROM category WHERE cat_id=?";
+
+        // method to prepare the statement
+        $stmt = mysqli_prepare($this->connection, $query);
+
+        // bind parameters
+        mysqli_stmt_bind_param($stmt, "i", $id);
+
+        // execute the statement
+        $result = mysqli_stmt_execute($stmt);
+
+        // check affected rows
+        $affected_rows = mysqli_stmt_affected_rows($stmt);
+
+        if ($result && $affected_rows > 0) {
+            return "Success";
+        } else {
+            return "Failed";
+        }
     }
 }
