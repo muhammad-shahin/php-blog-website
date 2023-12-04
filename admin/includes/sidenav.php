@@ -13,7 +13,7 @@
                     Category
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse" id="collapseLayoutsx" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                <div class="" id="collapseLayoutsx" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="add_category.php">Add Category</a>
                         <a class="nav-link" href="manage_category.php">Mange Category</a>
@@ -26,7 +26,7 @@
                     Post
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                <div class="" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="add_post.php">Add Post</a>
                         <a class="nav-link" href="manage_post.php">Mange Post</a>

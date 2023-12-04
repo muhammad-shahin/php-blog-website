@@ -64,4 +64,38 @@ class BlogSiteAdmin
 
         header("location: index.php");
     }
+
+    // add new category
+    public function add_cat($data)
+    {
+        $cat_name = $data['cat_name'];
+        $cat_desc = $data['cat_desc'];
+
+        // using prepared statements to prevent SQL injection
+        $query = "INSERT INTO category (cat_name, cat_desc) VALUES (?, ?)";
+
+        // method to prepare the statement
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "ss", $cat_name, $cat_desc);
+
+        if (mysqli_stmt_execute($stmt)) {
+            return "New Category Added Successfully";
+        } else {
+            return "Failed To Add New Category" . mysqli_error($this->connection);
+        }
+    }
+
+    public function all_category()
+    {
+        // get all category from category table
+        $query = "SELECT * FROM category";
+        $result = mysqli_query($this->connection, $query);
+        if (!$result) {
+            die("Query failed: " . mysqli_error($this->connection));
+        }
+    
+        // fetch the result as an associative array
+        $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return $categories;
+    }
 }
